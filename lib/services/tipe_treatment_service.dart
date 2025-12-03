@@ -5,7 +5,7 @@ import '../models/tipe_treatment_model.dart';
 
 class TipeTreatmentService {
   Future<List<TipeTreatmentModel>> getAllTipeTreatment() async {
-    final url = Uri.parse('${ApiConfig.baseUrl}/tipe_treatment');
+    final url = Uri.parse('${ApiConfig.baseUrl}/treatment');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -20,7 +20,7 @@ class TipeTreatmentService {
 
   /// (Opsional) Mengambil satu tipe treatment berdasarkan id
   Future<TipeTreatmentModel> getTipeTreatmentById(int id) async {
-    final url = Uri.parse('${ApiConfig.baseUrl}/tipe_treatment/$id');
+    final url = Uri.parse('${ApiConfig.baseUrl}/treatment/$id');
     final response = await http.get(url);
 
     if (response.statusCode == 200) {

@@ -5,12 +5,11 @@ import '../models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
-  static const String baseUrl =
-      'https://backend-project-akhir-102601587611.asia-southeast2.run.app';
+  static const String baseUrl = 'http://127.0.0.1:3000';
   // static const String baseUrl = 'http://172.20.10.4:8080';
   static Future<UserModel?> login(String email, String password) async {
     final response = await http.post(
-      Uri.parse('$baseUrl/api/login'),
+      Uri.parse('$baseUrl/api/users/login'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         'email': email,
@@ -21,21 +20,21 @@ class AuthService {
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
 
-      final prefs = await SharedPreferences.getInstance();
-      prefs.setInt('user_id', data['id']);
-      prefs.setString('token', data['token']);
-      prefs.setInt('user_id', data['id']);
-      print('Saved user_id: ${data['id']}');
+      final user = data['user']; // <-- ambil object user
 
-      return UserModel.fromJson(data);
-    } else {
-      return null;
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setInt('user_id', user['id']);
+      prefs.setString('token', data['token'] ?? '');
+
+      print('Saved user_id: ${user['id']}');
+
+      return UserModel.fromJson(user);
     }
   }
 
   static Future<bool> register(UserModel user) async {
     final response = await http.post(
-      Uri.parse('$baseUrl/api/register'),
+      Uri.parse('$baseUrl/api/users/register'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode(user.toRegisterJson()),
     );

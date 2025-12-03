@@ -29,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
     setState(() => _isLoading = true);
 
     final response = await AuthService.login(email, pass);
-    setState(() => _isLoading = false);
+    // setState(() => _isLoading = false);
 
     if (response != null) {
       final prefs = await SharedPreferences.getInstance();

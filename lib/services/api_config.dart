@@ -1,7 +1,6 @@
 class ApiConfig {
   // Ganti baseUrl dengan URL dari backend kamu
-  static const String baseUrl =
-      'https://backend-project-akhir-102601587611.asia-southeast2.run.app/api';
+  static const String baseUrl = 'http://127.0.0.1:3000/api';
 
   // (Opsional) Endpoint spesifik
   static const String login = '$baseUrl/login';
@@ -16,5 +15,5 @@ class ApiConfig {
 
   // Endpoint untuk reservasi
   static const String reservasi = '$baseUrl/reservasi';
-  static const String tipeTreatment = '$baseUrl/tipe_treatment';
+  static const String tipeTreatment = '$baseUrl/treatment';
 }
